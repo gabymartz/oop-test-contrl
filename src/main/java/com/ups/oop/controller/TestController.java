@@ -19,7 +19,7 @@ public class TestController {
                         @RequestParam(required = false) Integer age) {
         String message = "This is my first SpringBootProject!";
         if(name != null) {
-            message += " " + name;
+            message += " My name is " + name;
         }
         if(lastname != null){
             message += " " + lastname;
