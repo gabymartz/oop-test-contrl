@@ -22,12 +22,17 @@ public class TestController {
             message += " My name is " + name;
         }
         if(lastname != null){
-            message += " " + lastname;
+            message += " and my lastname is" + lastname;
         }
         if (age != null) {
             message += " and my age is " + age + " years old";
         }
         return message;
+    }
+
+    @GetMapping("/concat")
+    public String concat(){
+        return  "This is my second rest service!";
     }
 
     @GetMapping("/concat/{name}")
