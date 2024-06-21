@@ -28,4 +28,9 @@ public class PersonController {
     public Person createPerson(@RequestBody Person person) {
         return this.personService.createPerson(person);
     }
+
+    @DeleteMapping("/remove-person")
+    public String deletePerson(@RequestParam String id) {
+        return this.personService.deletePersonById(id);
+    }
 }
