@@ -29,6 +29,20 @@ public class PersonService {
         return person;
     }
 
+    public Person updatePerson(String id , Person person) {
+        for (int i = 0; i < personList.size(); i++) {
+            Person currentPer = personList.get(i);
+            if (person.getId().equalsIgnoreCase(currentPer.getId())) {
+                personList.set(i, person);
+            }
+
+        }
+        return person;
+
+    }
+
+
+
     public String deletePersonById(String id){
         String message = "Person with id " + id;
         for(Person per : personList){
@@ -37,6 +51,6 @@ public class PersonService {
                 return message + "removed successfully";
             }
         }
-        return message + "not found";
+        return message + " not found";
     }
 }
