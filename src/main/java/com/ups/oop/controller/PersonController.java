@@ -32,12 +32,12 @@ public class PersonController {
     }
 
     @PutMapping("/update-person")
-    public Person updatePerson(@RequestBody Person person) {
-        return this.personService.updatePerson(person.getId(),person);
+    public ResponseEntity updatePerson(@RequestBody Person person) {
+        return this.personService.updatePerson(person);
     }
 
     @DeleteMapping("/remove-person")
-    public String deletePerson(@RequestParam String id) {
+    public ResponseEntity deletePerson(@RequestParam String id) {
         return this.personService.deletePersonById(id);
     }
 }
