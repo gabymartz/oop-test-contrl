@@ -51,27 +51,35 @@ public class PersonService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
 
-    public Person updatePerson(String id , Person person) {
-        for (int i = 0; i < personList.size(); i++) {
-            Person currentPer = personList.get(i);
-            if (person.getId().equalsIgnoreCase(currentPer.getId())) {
-                personList.set(i, person);
+    private int findIndexById(String id){
+        int index = 0;
+        for (Person p: personList){
+            if(id.equals(p.getId())){
+                return index;
             }
-
+            index++;
         }
-        return person;
+        return -1;
+    }
+
+    public ResponseEntity updatePerson(Person person) {
+        int updateIndex = findIndexById(person.getId());
+        if(updateIndex != -1){
+            personList.set(updateIndex, person);
+            return ResponseEntity.status(HttpStatus.OK).body(person);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person with id " + person.getId() + " doesn't exist :C");
 
     }
 
-
-    public String deletePersonById(String id){
+    public ResponseEntity deletePersonById(String id){
         String message = "Person with id " + id;
         for(Person per : personList){
             if(id.equalsIgnoreCase(per.getId())){
                 personList.remove(per);
-                return message + " removed successfully :D";
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " removed succesfully");
             }
         }
-        return message +  " not found :/";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " Not found");
     }
 }
