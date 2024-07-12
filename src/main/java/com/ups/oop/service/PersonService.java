@@ -77,7 +77,7 @@ public class PersonService {
         for(Person per : personList){
             if(id.equalsIgnoreCase(per.getId())){
                 personList.remove(per);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " removed succesfully");
+                return ResponseEntity.status(HttpStatus.OK).body(message + " removed succesfully");
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message + " Not found");
