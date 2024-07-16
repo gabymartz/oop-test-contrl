@@ -1,7 +1,6 @@
 package com.ups.oop.service;
 
-import com.ups.oop.dto.Animals;
-import com.ups.oop.dto.Person;
+import com.ups.oop.dto.AnimalsDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,47 +10,47 @@ import java.util.List;
 
 @Service
 public class AnimalsService {
-    private List<Animals> animalsList = new ArrayList<>();
+    private List<AnimalsDTO> animalsDTOList = new ArrayList<>();
 
-    public ResponseEntity createAnimals(Animals animals) {
-        String animalsId = animals.getId();
+    public ResponseEntity createAnimals(AnimalsDTO animalsDTO) {
+        String animalsId = animalsDTO.getId();
         boolean wasFound = findAnimals(animalsId);
         if (wasFound){
-            String errorMessage = "Animal with id " + animalsId + " already exists ;)";
+            String errorMessage = "Animals with id " + animalsId + " already exists ;)";
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(errorMessage);
         } else {
-            animalsList.add(animals);
-            return ResponseEntity.status(HttpStatus.OK).body(animals);
+            animalsDTOList.add(animalsDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(animalsDTO);
         }
     }
 
     private boolean findAnimals(String id) {
-        for (Animals animals : animalsList) {
-            if (id.equals(animals.getId())) {
+        for (AnimalsDTO animalsDTO : animalsDTOList) {
+            if (id.equals(animalsDTO.getId())) {
                 return true;
             }
         }
         return false;
     }
     public ResponseEntity getAllAnimals(){
-        if(animalsList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animals List Not Found :C");
+        if(animalsDTOList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("AnimalsDTO List Not Found :C");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(animalsList);
+        return ResponseEntity.status(HttpStatus.OK).body(animalsDTOList);
     }
     public ResponseEntity getAnimalsById(String id){
-        for(Animals anils : animalsList){
+        for(AnimalsDTO anils : animalsDTOList){
             if(id.equalsIgnoreCase(anils.getId())){
                 return ResponseEntity.status(HttpStatus.OK).body(anils);
             }
         }
-        String errorMessage = "Animal with id " + id + " doesn't exist :C";
+        String errorMessage = "Animals with id " + id + " doesn't exist :C";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
     private int findIndexById(String id){
         int index = 0;
-        for (Animals anils: animalsList){
+        for (AnimalsDTO anils: animalsDTOList){
             if(id.equals(anils.getId())){
                 return index;
             }
@@ -59,20 +58,20 @@ public class AnimalsService {
         }
         return -1;
     }
-    public ResponseEntity updateAnimals(Animals animals) {
-        int updateIndex = findIndexById(animals.getId());
+    public ResponseEntity updateAnimals(AnimalsDTO animalsDTO) {
+        int updateIndex = findIndexById(animalsDTO.getId());
         if(updateIndex != -1){
-            animalsList.set(updateIndex, animals);
-            return ResponseEntity.status(HttpStatus.OK).body(animals);
+            animalsDTOList.set(updateIndex, animalsDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(animalsDTO);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animal with id " + animals.getId() + " doesn't exist :C");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animals with id " + animalsDTO.getId() + " doesn't exist :C");
 
     }
     public ResponseEntity deleteAnimalsById(String id){
-        String message = "Animal with id " + id;
-        for(Animals anils : animalsList){
+        String message = "Animals with id " + id;
+        for(AnimalsDTO anils : animalsDTOList){
             if(id.equalsIgnoreCase(anils.getId())){
-                animalsList.remove(anils);
+                animalsDTOList.remove(anils);
                 return ResponseEntity.status(HttpStatus.OK).body(message + " removed succesfully");
             }
         }
