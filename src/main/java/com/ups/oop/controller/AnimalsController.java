@@ -1,7 +1,6 @@
 package com.ups.oop.controller;
 
-import com.ups.oop.dto.Animals;
-import com.ups.oop.dto.Person;
+import com.ups.oop.dto.AnimalsDTO;
 import com.ups.oop.service.AnimalsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,14 +27,14 @@ public class AnimalsController {
         return this.animalsService.getAnimalsById(id);
     }
 
-    @PostMapping("/animals")
-    public ResponseEntity createAnimals(@RequestBody Animals animals) {
-        return this.animalsService.createAnimals(animals);
+    @PostMapping("/animalsDTO")
+    public ResponseEntity createAnimals(@RequestBody AnimalsDTO animalsDTO) {
+        return this.animalsService.createAnimals(animalsDTO);
     }
 
-    @PutMapping("/update-animals")
-    public ResponseEntity updateAnimals(@RequestBody Animals animals) {
-        return this.animalsService.updateAnimals(animals);
+    @PutMapping("/update-animalsDTO")
+    public ResponseEntity updateAnimals(@RequestBody AnimalsDTO animalsDTO) {
+        return this.animalsService.updateAnimals(animalsDTO);
     }
 
     @DeleteMapping("/remove-animals")

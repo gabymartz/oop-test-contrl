@@ -2,17 +2,17 @@ package com.ups.oop.dto;
 
 import lombok.Getter;
 
-public class Person {
+public class PersonDTO {
     @Getter
     private String id;
     private String name;
     private String lastname;
     private int age;
 
-    public Person() {
+    public PersonDTO() {
     }
 
-    public Person(String id, String name, String lastname, int age) {
+    public PersonDTO(String id, String name, String lastname, int age) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -48,7 +48,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "PersonDTO{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +

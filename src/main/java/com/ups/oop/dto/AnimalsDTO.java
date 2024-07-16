@@ -1,6 +1,6 @@
 package com.ups.oop.dto;
 
-public class Animals {
+public class AnimalsDTO {
     private String id;
     private String name;
     private String breath;
@@ -9,7 +9,7 @@ public class Animals {
     private double height;
     private double length;
 
-    public Animals(){
+    public AnimalsDTO(){
     }
 
     public String getId() {
@@ -62,7 +62,7 @@ public class Animals {
     }
     @Override
     public String toString() {
-        return "Animals{" +
+        return "AnimalsDTO{" +
                 "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", breath='" + breath + '\'' +
