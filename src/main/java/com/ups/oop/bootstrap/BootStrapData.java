@@ -35,15 +35,23 @@ public class BootStrapData implements CommandLineRunner {
 
 
         Animals a1 = new Animals();
-        a1.setAnimalsId("001");
-        a1.setName("Osito");
-        a1.setBreath("snau");
+        a1.setName("Diego");
+        a1.setBreed("schnauzer");
         a1.setColor("White");
-        a1.setWeight(1.0);
-        a1.setHeight(1.0);
-        a1.setLength(1.30);
+        a1.setWeight(1.6);
+        a1.setHeight(1.8);
+        a1.setLength(1.4);
+
+        Animals a2 = new Animals();
+        a2.setName("Mía");
+        a2.setBreed("Labrador");
+        a2.setColor("Black");
+        a2.setWeight(1.0);
+        a2.setHeight(1.9);
+        a2.setLength(1.3);
 
         animalsRepository.save(a1);
+        animalsRepository.save(a2);
 
 
         System.out.println("------------STARTED BOOTSTRAPDATA--------");
