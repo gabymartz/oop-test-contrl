@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnimalsService {
@@ -48,7 +49,11 @@ public class AnimalsService {
         List<AnimalsDTO> animalsList = new ArrayList<>();
 
         for(Animals a: animalsIterable){
-            AnimalsDTO animals = new AnimalsDTO(a.getId().toString(), a.getName(), a.getBreed(),a.getColor(), a.getWeight(), a.getWeight(),  a.getLength());
+            AnimalsDTO animals = new AnimalsDTO();
+                       animals.setId(a.getName() + "-" + a.getBreed() + "-" + a.getColor());
+                       animals.setWeight(a.getWeight());
+                       animals.setHeight(a.getHeight());
+                       animals.setLength(a.getLength());
             animalsList.add(animals);
         }
 
@@ -58,15 +63,23 @@ public class AnimalsService {
         return ResponseEntity.status(HttpStatus.OK).body(animalsList);
     }
 
-    public ResponseEntity getAnimalsById(String id){
-        for(AnimalsDTO a : animalsDTOList){
-            if(id.equalsIgnoreCase(a.getId())){
-                return ResponseEntity.status(HttpStatus.OK).body(a);
-            }
+    public ResponseEntity getAnimalsById(String id) {
+        Optional<Animals> animalsOptional = animalsRepository.findById(Long.valueOf(id));
+        if (animalsOptional.isPresent()) {
+            Animals animalsFound = animalsOptional.get();
+            AnimalsDTO animals = new AnimalsDTO();
+                    animals.setAnimalsCode(animalsFound.getName() + "-" + animalsFound.getBreed() + "-" + animalsFound.getColor());
+                    animals.setWeight(animalsFound.getWeight());
+                    animals.setHeight(animalsFound.getHeight());
+                    animals.setWeight(animalsFound.getLength());
+
+            return ResponseEntity.status(HttpStatus.OK).body(animals);
+        } else {
+            String errorMessage = "Animals with id " + id + " doesn't exist :C";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
-        String errorMessage = "Animals with id " + id + " doesn't exist :C";
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
+
     private int findIndexById(String id){
         int index = 0;
         for (AnimalsDTO anils: animalsDTOList){
