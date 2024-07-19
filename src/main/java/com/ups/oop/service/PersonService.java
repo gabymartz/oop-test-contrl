@@ -12,10 +12,10 @@ import java.util.List;
 
 @Service
 public class PersonService {
-    private final PersonRepository personRepository;
+    private final PersonRepository personRepository; //Inyección por dependencia
 
     public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+        this.personRepository = personRepository; //Inyección por dependencia por constructor
     }
 
     private List<PersonDTO> personDTOList = new ArrayList<>();
@@ -43,11 +43,14 @@ public class PersonService {
     }
 
     public ResponseEntity getAllPeople(){
-        Iterable <Person> personIterable = personRepository.findAll();
+        Iterable <Person> personIterable = personRepository.findAll(); //Iterable colección de datos similar a lista
         List<PersonDTO> peopleList = new ArrayList<>();
 
-        for(Person p: personIterable){
-            PersonDTO person = new PersonDTO(p.getPersonId(), p.getName(), p.getLastname(), p.getAge());
+        for(Person per: personIterable){
+            PersonDTO person= new PersonDTO();
+            person.setId(per.getPersonId());
+            person.setName(per.getName() + "-" + per.getLastname());
+            person.setAge(per.getAge());
             peopleList.add(person);
         }
 
