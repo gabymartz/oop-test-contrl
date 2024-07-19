@@ -19,10 +19,10 @@ public class Animals {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private double length;
-    private double height;
-    private double weight;
-    private String color;
-    private String breed;
     private String name;
+    private String breed;
+    private String color;
+    private double weight;
+    private double height;
+    private double length;
 }

@@ -48,7 +48,7 @@ public class AnimalsService {
         List<AnimalsDTO> animalsList = new ArrayList<>();
 
         for(Animals a: animalsIterable){
-            AnimalsDTO animals = new AnimalsDTO(a.getId().toString(), a.getLength(), a.getHeight(), a.getWeight(), a.getColor(), a.getBreed(), a.getName());
+            AnimalsDTO animals = new AnimalsDTO(a.getId().toString(), a.getName(), a.getBreed(),a.getColor(), a.getWeight(), a.getWeight(),  a.getLength());
             animalsList.add(animals);
         }
 
