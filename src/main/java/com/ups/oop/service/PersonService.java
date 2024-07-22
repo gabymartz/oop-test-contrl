@@ -23,14 +23,28 @@ public class PersonService {
 
     public ResponseEntity createPerson(PersonDTO personDTO) {
         String personId = personDTO.getId();
-        boolean wasFound = findPerson(personId);
-        if (wasFound){
-            String errorMessage = "PersonDTO with id " + personId + " already exists ;)";
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(errorMessage);
+        Optional<Person> personOptional = personRepository.findByPersonId(personId);
+
+        if (personOptional.isPresent()) {
+            String errorMessage = "Person with id " + personId + " doesn't exist :C";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+
         } else {
-            personDTOList.add(personDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(personDTO);
+            if (personDTO.getName().contains(" ")) {
+                Person personRecord = new Person();
+                personRecord.setPersonId(personDTO.getId());
+                String[] nameStrings = personDTO.getName().split(" ");
+                String name = nameStrings[0];
+                String lastname = nameStrings[1];
+                personRecord.setName(name);
+                personRecord.setLastname(lastname);
+                personRecord.setAge(personDTO.getAge());
+                personRepository.save(personRecord);
+                return ResponseEntity.status(HttpStatus.OK).body(personDTO);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Person name must contain two strings separated by a whitespaces");
+            }
+
         }
     }
 
