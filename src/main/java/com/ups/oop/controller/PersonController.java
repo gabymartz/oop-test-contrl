@@ -29,12 +29,12 @@ public class PersonController {
         return this.personService.getPersonById(id);
     }
 
-    @PostMapping("/personDTO")
+    @PostMapping("/person")
     public ResponseEntity createPerson(@RequestBody PersonDTO personDTO) {
         return this.personService.createPerson(personDTO);
     }
 
-    @PutMapping("/update-personDTO")
+    @PutMapping("/update-person")
     public ResponseEntity updatePerson(@RequestBody PersonDTO personDTO) {
         return this.personService.updatePerson(personDTO);
     }
