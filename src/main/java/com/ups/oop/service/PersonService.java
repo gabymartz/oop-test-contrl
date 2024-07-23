@@ -85,17 +85,6 @@ public class PersonService {
        }
     }
 
-    private int findIndexById(String id){
-        int index = 0;
-        for (PersonDTO p: personDTOList){
-            if(id.equals(p.getId())){
-                return index;
-            }
-            index++;
-        }
-        return -1;
-    }
-
     public ResponseEntity updatePerson(PersonDTO personDTO) {
         String personId = personDTO.getId();
         //check repository
