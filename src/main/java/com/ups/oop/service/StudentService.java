@@ -27,7 +27,7 @@ public class StudentService {
         Optional<Student> studentOptional = studentRepository.findByStudentCode(studentId);
 
         if (studentOptional.isPresent()) {
-            String errorMessage = "Person with id " + studentId + " already exist :C";
+            String errorMessage = "Student with id " + studentId + " already exist :C";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 
         } else {
@@ -42,7 +42,7 @@ public class StudentService {
                 studentRepository.save(studentRecord);
                 return ResponseEntity.status(HttpStatus.OK).body(studentDTO);
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Person name must contain two strings separated by a whitespaces");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student name must contain two strings separated by a whitespaces");
             }
 
         }
@@ -59,7 +59,7 @@ public class StudentService {
         }
 
         if(studentList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("StudentDTO List Not Found :C");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found :C");
         }
         return ResponseEntity.status(HttpStatus.OK).body(studentList);
     }
@@ -76,7 +76,7 @@ public class StudentService {
             return ResponseEntity.status(HttpStatus.OK).body(student);
         } else {
             //if record wasn't found
-            String errorMessage = "Person with id " + studentCode + " doesn't exist :C";
+            String errorMessage = "Student with id " + studentCode + " doesn't exist :C";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
@@ -97,10 +97,10 @@ public class StudentService {
                 studentRepository.save(student);
                 return ResponseEntity.status(HttpStatus.OK).body(student);
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Person name must contain two strings separated by a whitespaces");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student name must contain two strings separated by a whitespaces");
             }
         } else {
-            String errorMessage = "Person with id " + studentId + "Not found";
+            String errorMessage = "Student with id " + studentId + "Not found";
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
