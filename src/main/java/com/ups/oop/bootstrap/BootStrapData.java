@@ -2,8 +2,10 @@ package com.ups.oop.bootstrap;
 
 import com.ups.oop.entity.Animals;
 import com.ups.oop.entity.Person;
+import com.ups.oop.entity.Student;
 import com.ups.oop.repository.AnimalsRepository;
 import com.ups.oop.repository.PersonRepository;
+import com.ups.oop.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Component;
 public class BootStrapData implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final AnimalsRepository animalsRepository;
+    private final StudentRepository studentRepository;
 
-    public BootStrapData(PersonRepository personRepository, AnimalsRepository animalsRepository ){
+    public BootStrapData(PersonRepository personRepository, AnimalsRepository animalsRepository, StudentRepository studentRepository){
         this.personRepository = personRepository;
         this.animalsRepository = animalsRepository;
+        this.studentRepository = studentRepository;
     }
     @Override
     public void run(String... args)throws Exception {
@@ -53,10 +57,23 @@ public class BootStrapData implements CommandLineRunner {
         animalsRepository.save(a1);
         animalsRepository.save(a2);
 
+        Student s1 = new Student();
+        s1.setStudentCode("ups1");
+        s1.setName("Gabriela");
+        s1.setLastname("Martinez");
+
+        Student s2 = new Student();
+        s2.setStudentCode("ups2");
+        s2.setName("Gabriel");
+        s2.setLastname("Moran");
+
+        studentRepository.save(s1);
+        studentRepository.save(s2);
 
         System.out.println("------------STARTED BOOTSTRAPDATA--------");
         System.out.println("Number of Persons:" + personRepository.count());
         System.out.println("Number of Animals:" + animalsRepository.count());
+        System.out.println("Number of Students:" + studentRepository.count());
 
     }
 }
