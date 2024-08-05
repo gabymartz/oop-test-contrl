@@ -52,18 +52,34 @@ public class PersonService {
         Iterable <Person> personIterable = personRepository.findAll(); //Iterable colección de datos similar a lista
         List<PersonDTO> peopleList = new ArrayList<>();
 
-        for(Person per: personIterable){
-            PersonDTO person= new PersonDTO();
-            person.setId(per.getPersonId());
-            person.setName(per.getName() + "-" + per.getLastname());
-            person.setAge(per.getAge());
+        for(Person p: personIterable){
+            PersonDTO person= new PersonDTO(p.getPersonId(),p.getName() + " " + p.getLastname(), p.getAge());
             peopleList.add(person);
+
+            //Method #2
+            //PersonDTO person= new PersonDTO();
+            //person.setId(p.getPersonId());
+            //person.setName(p.getName() + "-" + p.getLastname());
+            //person.setAge(p.getAge());
+            //peopleList.add(person);
         }
 
         if(peopleList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PersonDTO List Not Found :C");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person List Not Found :C");
         }
         return ResponseEntity.status(HttpStatus.OK).body(peopleList);
+    }
+
+    //TemplateController
+
+    public List<PersonDTO> getPeople(){
+        Iterable<Person> personIterable = personRepository.findAll();
+        List<PersonDTO> peopleList = new ArrayList<>();
+        for (Person p : personIterable) {
+            PersonDTO person = new PersonDTO(p.getPersonId(), p.getName() + " " + p.getLastname(), p.getAge());
+            peopleList.add(person);
+        }
+        return peopleList;
     }
 
     public ResponseEntity getPersonById(String personId){
