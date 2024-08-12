@@ -30,4 +30,5 @@ public class TemplateController {
         model.addAttribute("animals",  animalsService.getAnimals());
         return "animals/list";
     }
+
 }
