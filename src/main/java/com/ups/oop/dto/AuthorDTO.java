@@ -7,9 +7,7 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
- public class BookDTO {
-    private String bookId;
+ public class AuthorDTO {
+    private String author_id;
     private String name;
-    private String editorial;
-    private String title;
 }
