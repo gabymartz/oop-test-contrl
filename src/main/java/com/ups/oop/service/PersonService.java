@@ -12,16 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonService {
-    private final PersonRepository personRepository; //Inyección por dependencia
+ public class PersonService {
 
-    public PersonService(PersonRepository personRepository) {
+     private final PersonRepository personRepository; //Inyección por dependencia
+
+     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository; //Inyección por dependencia por constructor
-    }
+     }
 
-    private List<PersonDTO> personDTOList = new ArrayList<>();
+     private List<PersonDTO> personDTOList = new ArrayList<>();
 
-    public ResponseEntity createPerson(PersonDTO personDTO) {
+     public ResponseEntity createPerson(PersonDTO personDTO) {
         String personId = personDTO.getId();
         Optional<Person> personOptional = personRepository.findByPersonId(personId);
 

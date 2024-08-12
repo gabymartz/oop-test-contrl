@@ -1,5 +1,6 @@
 package com.ups.oop.dto;
 
+
 import lombok.*;
 
 @NoArgsConstructor
@@ -8,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 
-public class PersonDTO {
+ public class PersonDTO {
     private String id;
     private String name;
     private int age;

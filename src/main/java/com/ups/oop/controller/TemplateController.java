@@ -30,5 +30,9 @@ public class TemplateController {
         model.addAttribute("animals",  animalsService.getAnimals());
         return "animals/list";
     }
-
+    @GetMapping("/books")
+    public String getBooks(Model model){
+        model.addAttribute("books", bookService.getBook());
+        return "books/list";
+    }
 }
