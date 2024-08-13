@@ -1,6 +1,5 @@
 package com.ups.oop.service;
 
-
 import com.ups.oop.dto.BookDTO;
 import com.ups.oop.entity.Book;
 import com.ups.oop.repository.BookRepository;
@@ -16,17 +15,25 @@ public class BookService {
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-    private List<BookDTO> bookDTOList = new ArrayList<>();
 
-    //TemplateController
-
-    public List<BookDTO> getBooks(){
+    public List<BookDTO> getBook() {
         Iterable<Book> bookIterable = bookRepository.findAll();
-        List<BookDTO> bookList = new ArrayList<>();
-        for (Book b : bookIterable) {
-            BookDTO book = new BookDTO(b.getAuthor().getName(), b.getEditorial(),b.getTitle(),);
-            bookList.add(book);
+        List<BookDTO> bookDTOList = new ArrayList<>();
+
+        for (Book book : bookIterable) {
+            String authorFullName = book.getAuthor() != null ?
+                    book.getAuthor().getName() + " " + book.getAuthor().getLastname() :
+                    "N/A";
+
+            BookDTO bookDTO = new BookDTO(
+                    book.getId(),
+                    book.getTitle(),
+                    book.getEditorial(),
+                    authorFullName
+            );
+            bookDTOList.add(bookDTO);
         }
-        return bookList;
+
+        return bookDTOList;
     }
 }

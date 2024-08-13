@@ -1,6 +1,12 @@
 package com.ups.oop.dto;
 
-import lombok.*;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -8,8 +14,8 @@ import lombok.*;
 @Getter
 @Setter
  public class BookDTO {
-    private String bookId;
-    private String name;
-    private String editorial;
+    private Long id;
     private String title;
+    private String editorial;
+    private String authorFullName;
 }

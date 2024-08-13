@@ -83,11 +83,13 @@ public class BootStrapData implements CommandLineRunner {
 
         //BOOKS AND AUTHORS
 
-        //#1
+        //#1 ALEJANDRO DUMAS
         Author au1 = new Author();
         au1.setName("Alejandro");
         au1.setLastname("Dumas");
         authorRepository.save(au1);
+
+        // BOOKS
 
         Book b1 = new Book();
         b1.setTitle("Conde de Montecristo");
@@ -98,27 +100,49 @@ public class BootStrapData implements CommandLineRunner {
         au1.getBooks().add(b1);
         authorRepository.save(au1);
 
-        //#2
+        Book b5 = new Book();
+        b5.setTitle("Los Tres Mosqueteros");
+        b5.setEditorial("Pearson");
+        b5.setAuthor(au1);
+        bookRepository.save(b5);
+
+        au1.getBooks().add(b5);
+        authorRepository.save(au1);
+
+        //#2 JK ROWLING
         Author au2 = new Author();
         au2.setName("J.K.");
         au2.setLastname("Rowling");
         authorRepository.save(au2);
 
+        //BOOKS
+
         Book b2 = new Book();
-        b2.setTitle("Harry Potter");
+        b2.setTitle("Harry Potter y la Piedra Filosofal");
         b2.setEditorial("Us Editorial");
         b2.setAuthor(au2);
         bookRepository.save(b2);
 
-        au1.getBooks().add(b2);
+        au2.getBooks().add(b2);
         authorRepository.save(au2);
 
-        //#3
+        Book b6 = new Book();
+        b6.setTitle("Harry Potter y la Cámara Secreta");
+        b6.setEditorial(" Us Editorial");
+        b6.setAuthor(au2);
+        bookRepository.save(b6);
+
+        au2.getBooks().add(b6);
+        authorRepository.save(au2);
+
+        //#3 GABRIEL GARCIA MARQUEZ
 
         Author au3 = new Author();
         au3.setName("Gabriel");
         au3.setLastname("Garcia Marquez");
         authorRepository.save(au3);
+
+        //BOOKS
 
         Book b3 = new Book();
         b3.setTitle("Cien años de Soledad");
@@ -126,8 +150,20 @@ public class BootStrapData implements CommandLineRunner {
         b3.setAuthor(au3);
         bookRepository.save(b3);
 
-        au1.getBooks().add(b3);
+        au3.getBooks().add(b3);
         authorRepository.save(au3);
+
+        Book b4 = new Book();
+        b4.setTitle("Nos Vemos en Agosto");
+        b4.setEditorial("Penguin Books");
+        b4.setAuthor(au3);
+        bookRepository.save(b4);
+
+        au3.getBooks().add(b4);
+        authorRepository.save(au3);
+
+
+        // #6 add book
 
         //Student s1 = new Student();
         //s1.setStudentCode("ups1");
