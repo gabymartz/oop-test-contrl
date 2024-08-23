@@ -2,6 +2,7 @@ package com.ups.oop.service;
 
 import com.ups.oop.dto.BookDTO;
 import com.ups.oop.entity.Book;
+import com.ups.oop.entity.Editorial;
 import com.ups.oop.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +16,21 @@ public class BookService {
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
-    public List<BookDTO> getBook() {
+    public List<BookDTO> getAllBooks() {
         Iterable<Book> bookIterable = bookRepository.findAll();
-        List<BookDTO> bookDTOList = new ArrayList<>();
-
-        for (Book book : bookIterable) {
-            String authorFullName = book.getAuthor() != null ?
-                    book.getAuthor().getName() + " " + book.getAuthor().getLastname() :
-                    "N/A";
-
-            BookDTO bookDTO = new BookDTO(
-                    book.getId(),
+        List<BookDTO> bookList = new ArrayList<>();
+        for(Book book : bookIterable) {
+            List<String> editorials = new ArrayList<>();
+            for(Editorial editorial : book.getEditorials()) {
+                editorials.add(editorial.getName());
+            }
+            BookDTO b = new BookDTO(
                     book.getTitle(),
-                    book.getEditorial(),
-                    authorFullName
+                    book.getAuthor().getName() + "-" + book.getAuthor().getLastname(),
+                    editorials
             );
-            bookDTOList.add(bookDTO);
+            bookList.add(b);
         }
-
-        return bookDTOList;
+        return bookList;
     }
 }

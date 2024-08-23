@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +16,7 @@ import lombok.ToString;
 @Getter
 @Setter
  public class BookDTO {
-    private Long id;
     private String title;
-    private String editorial;
-    private String authorFullName;
+    private String author;
+    private List<String> editorials;
 }

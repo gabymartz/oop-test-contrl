@@ -1,30 +1,34 @@
 package com.ups.oop.bootstrap;
 
-import com.ups.oop.entity.Animals;
-import com.ups.oop.entity.Author;
-import com.ups.oop.entity.Book;
-import com.ups.oop.entity.Person;
+import com.ups.oop.entity.*;
 import com.ups.oop.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BootStrapData implements CommandLineRunner {
+ public class BootStrapData implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final AnimalsRepository animalsRepository;
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final ClientRepository clientRepository;
+    private final WorkerRepository workerRepository;
+    private final EditorialRepository editorialRepository;
 
-    public BootStrapData(PersonRepository personRepository, AnimalsRepository animalsRepository, AuthorRepository authorRepository, BookRepository bookRepository){
+
+    public BootStrapData(PersonRepository personRepository, AnimalsRepository animalsRepository, AuthorRepository authorRepository, BookRepository bookRepository, ClientRepository clientRepository, EditorialRepository editorialRepository, WorkerRepository workerRepository) {
         this.personRepository = personRepository;
         this.animalsRepository = animalsRepository;
         this.authorRepository = authorRepository;
+        this.clientRepository = clientRepository;
+        this.workerRepository = workerRepository;
         this.bookRepository = bookRepository;
+        this.editorialRepository = editorialRepository;
     }
-    @Override
-    public void run(String... args)throws Exception {
 
-       //PERSON
+    public void createPeople() {
+
+        //PERSON
         Person p1 = new Person();
         p1.setPersonId("0955889192");
         p1.setName("Juan");
@@ -47,9 +51,10 @@ public class BootStrapData implements CommandLineRunner {
         personRepository.save(p1);
         personRepository.save(p2);
         personRepository.save(p3);
+    }
+    //ANIMALS
 
-        //ANIMALS
-
+    public void createAnimals() {
         Animals a1 = new Animals();
         a1.setPetName("Diego");
         a1.setName("Dog");
@@ -80,9 +85,10 @@ public class BootStrapData implements CommandLineRunner {
         animalsRepository.save(a1);
         animalsRepository.save(a2);
         animalsRepository.save(a3);
+    }
 
+    public void createBooksAuthorsAndEditorials() {
         //BOOKS AND AUTHORS
-
         //#1 ALEJANDRO DUMAS
         Author au1 = new Author();
         au1.setName("Alejandro");
@@ -162,27 +168,79 @@ public class BootStrapData implements CommandLineRunner {
         au3.getBooks().add(b4);
         authorRepository.save(au3);
 
+        //EDITORIALS
+        Editorial e1 = new Editorial();
+        e1.setName("Pearson");
+        e1.getBooks().add(b1);
+        e1.getBooks().add(b2);
+        editorialRepository.save(e1);
 
-        // #6 add book
+        Editorial e2 = new Editorial();
+        e2.setName("LNS");
+        e2.getBooks().add(b2);
+        e2.getBooks().add(b3);
+        editorialRepository.save(e2);
 
-        //Student s1 = new Student();
-        //s1.setStudentCode("ups1");
-        //s1.setName("Gabriela");
-        //s1.setLastname("Martinez");
+        //books Join with Editorial
+        b1.getEditorials().add(e1);
+        bookRepository.save(b1);
 
-        //Student s2 = new Student();
-        //s2.setStudentCode("ups2");
-        //s2.setName("Gabriel");
-        //s2.setLastname("Moran");
+        b2.getEditorials().add(e1);
+        b2.getEditorials().add(e2);
+        bookRepository.save(b2);
 
-        //studentRepository.save(s1);
-        //studentRepository.save(s2);
+        b3.getEditorials().add(e2);
+        bookRepository.save(b3);
+    }
 
-        System.out.println("------------STARTED BOOTSTRAPDATA--------");
-        System.out.println("Number of Persons:" + personRepository.count());
-        System.out.println("Number of Animals:" + animalsRepository.count());
-        System.out.println("Number of Authors:" + authorRepository.count());
-        System.out.println("Number of Books:" + bookRepository.count());
+    public void createClients() {
+        //CLIENTS
+        Client c1 = new Client();
+        c1.setClientCode("C-0001");
+        c1.setName("Juan");
+        c1.setLastname("Pia");
+        c1.setAge(20);
+        clientRepository.save(c1);
 
+        Client c2 = new Client();
+        c2.setClientCode("C-0002");
+        c2.setName("María");
+        c2.setLastname("Lopez");
+        c2.setAge(35);
+        clientRepository.save(c2);
+    }
+
+    public void createWorkers() {
+        //WORKERS
+        Worker w1 = new Worker();
+        w1.setWorkerCode("W-0001");
+        w1.setName("Isaac");
+        w1.setLastname("Macías");
+        w1.setAge(25);
+        workerRepository.save(w1);
+
+        Worker w2 = new Worker();
+        w2.setWorkerCode("W-0002");
+        w2.setName("Patricio");
+        w2.setLastname("Andrade");
+        w2.setAge(28);
+        workerRepository.save(w2);
+
+    }
+    @Override
+    public void run(String... args) throws Exception {
+        createPeople();
+        createAnimals();
+        createBooksAuthorsAndEditorials();
+        createClients();
+        createWorkers();
+
+        System.out.println("--------- Started BootstrapData -------------");
+        System.out.println("Number of Persons: " + personRepository.count());
+        System.out.println("Number of Animals: " + animalsRepository.count());
+        System.out.println("Number of Authors: " + authorRepository.count());
+        System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Number of Clients: " + clientRepository.count());
+        System.out.println("Number of Workers: " + workerRepository.count());
     }
 }
